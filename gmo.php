@@ -99,13 +99,23 @@ class GMOTemplate extends QuickTemplate {
     function head() {
 ?>
 <head>
-    <meta http-equiv="Content-Type" content="<?php $this->text('mimetype') ?>; charset=<?php $this->text('charset') ?>" />
-    <meta name="keywords" content="web browser, mozilla, firefox, foxfire, camino, thunderbird, bugzilla, user agent, email client, seamonkey, calendar, lightning, open web, better internet" />
-    <title><?php $this->text('pagetitle') ?></title>
-    <?php $this->html('headlinks') ?>
-    <?php $this->html('csslinks') ?>
+	<meta http-equiv="Content-Type" content="<?php $this->text('mimetype') ?>; charset=<?php $this->text('charset') ?>" />
+	<?php $this->html('headlinks') ?>
+	<title><?php $this->text('pagetitle') ?></title>
+	<?php $this->html('csslinks') ?>
 
-    <?php print Skin::makeGlobalVariablesScript( $this->data ); ?>
+	<style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "<?php $this->text('stylepath') ?>/<?php $this->text('stylename') ?>/main.css"; /*]]>*/</style>
+	<link rel="stylesheet" type="text/css" media="print" href="<?php $this->text('stylepath') ?>/common/commonPrint.css" />
+	<?php print Skin::makeGlobalVariablesScript( $this->data ); ?>
+	<script type="text/javascript" src="<?php                                   $this->text('stylepath' ) ?>/common/wikibits.js"></script>
+	<?php if($this->data['jsvarurl'  ]) { ?><script type="text/javascript" src="<?php $this->text('jsvarurl'  ) ?>"></script><?php } ?>
+	<?php   if($this->data['pagecss']) { ?>
+			<style type="text/css"><?php $this->html('pagecss') ?></style>
+	<?php   } ?>
+	<?php if($this->data['usercss'   ]) { ?><style type="text/css"><?php              $this->html('usercss'   ) ?></style><?php    } ?>
+	<?php if($this->data['userjs'    ]) { ?><script type="text/javascript" src="<?php $this->text('userjs'    ) ?>"></script><?php } ?>
+	<?php if($this->data['userjsprev']) { ?><script type="text/javascript"><?php      $this->html('userjsprev') ?></script><?php   } ?>
+	<?php $this->html('headscripts') ?>
 </head>
 <?php
     }
@@ -125,7 +135,7 @@ class GMOTemplate extends QuickTemplate {
 </ul>
 
 <div id="header">
-    <h1 class="unitPng"><a href="<?=$GLOBALS['wgSitename'];?>"><?=$GLOBALS['wgSitename'];?></a></h1>
+    <h1 class="unitPng"><a href="/"><?=$GLOBALS['wgSitename'];?></a></h1>
     <div id="header-contents">
         <ul id="nav">
             <?php foreach($this->data['content_actions'] as $key => $action) {
@@ -147,7 +157,6 @@ class GMOTemplate extends QuickTemplate {
 </div>
     
 </div>
-
 <div id="main">
     <?php
         }
@@ -161,7 +170,8 @@ class GMOTemplate extends QuickTemplate {
 
             if($this->data['sitenotice']) { ?><div id="siteNotice"><?php $this->html('sitenotice') ?></div><?php }
     ?>
-            <div id="wiki-tools">
+            
+            <div id="wiki-tools">         
                 <script type="<?php $this->text('jsmimetype') ?>"> if (window.isMSIE55) fixalpha(); </script>
                 <?php foreach ($this->data['sidebar'] as $bar => $cont) {
                 if($bar=='navigation') { ?>
@@ -174,9 +184,10 @@ class GMOTemplate extends QuickTemplate {
                             <?php } ?>
                         </ul>
                     </div>
-                    <div class="portlet" id="p-personal">
-                      <h2><?php $this->msg('personaltools') ?></h2>
-                      <div class="pBody">
+                </div>
+                <div class="portlet" id="p-personal">
+                    <h2><?php $this->msg('personaltools') ?></h2>
+                    <div class="pBody">
                         <ul>
                         <?php foreach($this->data['personal_urls'] as $key => $item) {
                            ?><li id="pt-<?php echo htmlspecialchars($key) ?>"><a href="<?php
@@ -186,10 +197,61 @@ class GMOTemplate extends QuickTemplate {
                            echo htmlspecialchars($item['text']) ?></a></li><?php
                         } ?>
                         </ul>
-                      </div>
                     </div>
-                  <?php }} ?>
-                </div>
+                </div>                  
+	            
+	            <div class="portlet" id="p-tb">
+		            <h2><?php $this->msg('toolbox') ?></h2>
+		            <div class="pBody">
+			            <ul>
+                        <?php
+		                    if($this->data['notspecialpage']) { ?>
+				            <li id="t-whatlinkshere"><a href="<?php
+				            echo htmlspecialchars($this->data['nav_urls']['whatlinkshere']['href'])
+				            ?>"<?php echo $this->skin->tooltipAndAccesskey('t-whatlinkshere') ?>><?php $this->msg('whatlinkshere') ?></a></li>
+                        <?php
+			            if( $this->data['nav_urls']['recentchangeslinked'] ) { ?>
+				            <li id="t-recentchangeslinked"><a href="<?php
+				            echo htmlspecialchars($this->data['nav_urls']['recentchangeslinked']['href'])
+				            ?>"<?php echo $this->skin->tooltipAndAccesskey('t-recentchangeslinked') ?>><?php $this->msg('recentchangeslinked-toolbox') ?></a></li>
+                        <?php 		}
+		                        }
+		                        if( isset( $this->data['nav_urls']['trackbacklink'] ) && $this->data['nav_urls']['trackbacklink'] ) { ?>
+			                        <li id="t-trackbacklink"><a href="<?php
+				                        echo htmlspecialchars($this->data['nav_urls']['trackbacklink']['href'])
+				                        ?>"<?php echo $this->skin->tooltipAndAccesskey('t-trackbacklink') ?>><?php $this->msg('trackbacklink') ?></a></li>
+                        <?php 	}
+		                        if($this->data['feeds']) { ?>
+			                        <li id="feedlinks"><?php foreach($this->data['feeds'] as $key => $feed) {
+					                        ?><a id="<?php echo Sanitizer::escapeId( "feed-$key" ) ?>" href="<?php
+					                        echo htmlspecialchars($feed['href']) ?>" rel="alternate" type="application/<?php echo $key ?>+xml" class="feedlink"<?php echo $this->skin->tooltipAndAccesskey('feed-'.$key) ?>><?php echo htmlspecialchars($feed['text'])?></a>&nbsp;
+					    <?php } ?></li>
+					    <?php  }
+		                        foreach( array('contributions', 'log', 'blockip', 'emailuser', 'upload', 'specialpages') as $special ) {
+			                        if($this->data['nav_urls'][$special]) {
+				                        ?><li id="t-<?php echo $special ?>"><a href="<?php echo htmlspecialchars($this->data['nav_urls'][$special]['href'])
+				                        ?>"<?php echo $this->skin->tooltipAndAccesskey('t-'.$special) ?>><?php $this->msg($special) ?></a></li>
+                                <?php }
+		                        }
+
+		                        if(!empty($this->data['nav_urls']['print']['href'])) { ?>
+				                        <li id="t-print"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['print']['href'])
+				                        ?>" rel="alternate"<?php echo $this->skin->tooltipAndAccesskey('t-print') ?>><?php $this->msg('printableversion') ?></a></li><?php
+		                        }
+
+		                        if(!empty($this->data['nav_urls']['permalink']['href'])) { ?>
+				                        <li id="t-permalink"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['permalink']['href'])
+				                        ?>"<?php echo $this->skin->tooltipAndAccesskey('t-permalink') ?>><?php $this->msg('permalink') ?></a></li><?php
+		                        } elseif ($this->data['nav_urls']['permalink']['href'] === '') { ?>
+				                        <li id="t-ispermalink"<?php echo $this->skin->tooltip('t-ispermalink') ?>><?php $this->msg('permalink') ?></li><?php
+		                        }
+
+		                        wfRunHooks( 'MonoBookTemplateToolboxEnd', array( &$this ) );
+		                        wfRunHooks( 'SkinTemplateToolboxEnd', array( &$this ) );
+                        ?>
+			            </ul>
+		            </div>
+	            </div> <?php }} ?>
             </div>
             
             <div id="main-content"<?php if($menu)print(' class="with-menu"');?>>              
@@ -210,8 +272,9 @@ class GMOTemplate extends QuickTemplate {
                 <?php if($this->data['showjumplinks']) { ?><div id="jump-to-nav"><?php $this->msg('jumpto') ?> <a href="#column-one"><?php $this->msg('jumptonavigation') ?></a>, <a href="#searchInput"><?php $this->msg('jumptosearch') ?></a></div><?php } ?>
                 <!-- start content -->
                 <?php if($menu)
-              $this->toc($toc); ?>
-                <?php print $body ?>
+
+                    $this->toc($toc); ?>
+                <?php $this->html('bodytext') ?>
                 <?php if($this->data['catlinks']) { $this->html('catlinks'); } ?>
                 <!-- end content -->
                 <?php if($this->data['dataAfterContent']) { $this->html ('dataAfterContent'); } ?>
@@ -223,6 +286,7 @@ class GMOTemplate extends QuickTemplate {
         }
 
         /*************************************************************************************************/
+        
         function footer() {
     ?>
         </div><!-- end #main -->
@@ -233,12 +297,18 @@ class GMOTemplate extends QuickTemplate {
 	        <a href="/" id="logo-footer"><img src="/skins/gmo/img/screen/template/screen/logo_footer.png"></a>
         </div>
         <div class="col-span">
-            <?php 
-                echo $this->data['lastmod']; 
-                echo "<br>";
-                echo $this->data['viewcount']; 
-            ?>
-        </div>
+        <?php if($this->data['copyrightico']) { ?><div id="f-copyrightico"><?php $this->html('copyrightico') ?></div><?php } ?>
+		<?php if($this->data['lastmod'   ]) { ?><span id="f-lastmod"><?php    $this->html('lastmod')    ?></span><?php } ?>
+		<?php if($this->data['viewcount' ]) { ?><span id="f-viewcount"><?php  $this->html('viewcount')  ?> </span><?php } ?>
+		<ul id="f-list">
+			<?php if($this->data['credits'   ]) { ?><li id="f-credits"><?php    $this->html('credits')    ?></li><?php } ?>
+			<?php if($this->data['copyright' ]) { ?><li id="f-copyright"><?php  $this->html('copyright')  ?></li><?php } ?>
+			<?php if($this->data['about'     ]) { ?><li id="f-about"><?php      $this->html('about')      ?></li><?php } ?>
+			<?php if($this->data['disclaimer']) { ?><li id="f-disclaimer"><?php $this->html('disclaimer') ?></li><?php } ?>
+            <li><a href="http://www.mozilla.org/about/policies/privacy-policy.html">Privacy Policy</a></li>
+		</ul>
+		<?php if($this->data['poweredbyico']) { ?><div id="f-poweredbyico"><?php $this->html('poweredbyico') ?></div><?php } ?>
+        </div>       
     </div><!-- end #footer -->
 </div>
 
@@ -348,6 +418,65 @@ class GMOTemplate extends QuickTemplate {
   
     
     }
+    
+    	function toolbox() {
+?>
+	<div class="portlet" id="p-tb">
+		<h5><?php $this->msg('toolbox') ?></h5>
+		<div class="pBody">
+			<ul>
+<?php
+		if($this->data['notspecialpage']) { ?>
+				<li id="t-whatlinkshere"><a href="<?php
+				echo htmlspecialchars($this->data['nav_urls']['whatlinkshere']['href'])
+				?>"<?php echo $this->skin->tooltipAndAccesskey('t-whatlinkshere') ?>><?php $this->msg('whatlinkshere') ?></a></li>
+<?php
+			if( $this->data['nav_urls']['recentchangeslinked'] ) { ?>
+				<li id="t-recentchangeslinked"><a href="<?php
+				echo htmlspecialchars($this->data['nav_urls']['recentchangeslinked']['href'])
+				?>"<?php echo $this->skin->tooltipAndAccesskey('t-recentchangeslinked') ?>><?php $this->msg('recentchangeslinked-toolbox') ?></a></li>
+<?php 		}
+		}
+		if( isset( $this->data['nav_urls']['trackbacklink'] ) && $this->data['nav_urls']['trackbacklink'] ) { ?>
+			<li id="t-trackbacklink"><a href="<?php
+				echo htmlspecialchars($this->data['nav_urls']['trackbacklink']['href'])
+				?>"<?php echo $this->skin->tooltipAndAccesskey('t-trackbacklink') ?>><?php $this->msg('trackbacklink') ?></a></li>
+<?php 	}
+		if($this->data['feeds']) { ?>
+			<li id="feedlinks"><?php foreach($this->data['feeds'] as $key => $feed) {
+					?><a id="<?php echo Sanitizer::escapeId( "feed-$key" ) ?>" href="<?php
+					echo htmlspecialchars($feed['href']) ?>" rel="alternate" type="application/<?php echo $key ?>+xml" class="feedlink"<?php echo $this->skin->tooltipAndAccesskey('feed-'.$key) ?>><?php echo htmlspecialchars($feed['text'])?></a>&nbsp;
+					<?php } ?></li><?php
+		}
+
+		foreach( array('contributions', 'log', 'blockip', 'emailuser', 'upload', 'specialpages') as $special ) {
+
+			if($this->data['nav_urls'][$special]) {
+				?><li id="t-<?php echo $special ?>"><a href="<?php echo htmlspecialchars($this->data['nav_urls'][$special]['href'])
+				?>"<?php echo $this->skin->tooltipAndAccesskey('t-'.$special) ?>><?php $this->msg($special) ?></a></li>
+<?php		}
+		}
+
+		if(!empty($this->data['nav_urls']['print']['href'])) { ?>
+				<li id="t-print"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['print']['href'])
+				?>" rel="alternate"<?php echo $this->skin->tooltipAndAccesskey('t-print') ?>><?php $this->msg('printableversion') ?></a></li><?php
+		}
+
+		if(!empty($this->data['nav_urls']['permalink']['href'])) { ?>
+				<li id="t-permalink"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['permalink']['href'])
+				?>"<?php echo $this->skin->tooltipAndAccesskey('t-permalink') ?>><?php $this->msg('permalink') ?></a></li><?php
+		} elseif ($this->data['nav_urls']['permalink']['href'] === '') { ?>
+				<li id="t-ispermalink"<?php echo $this->skin->tooltip('t-ispermalink') ?>><?php $this->msg('permalink') ?></li><?php
+		}
+
+		wfRunHooks( 'MonoBookTemplateToolboxEnd', array( &$this ) );
+		wfRunHooks( 'SkinTemplateToolboxEnd', array( &$this ) );
+?>
+			</ul>
+		</div>
+	</div>
+<?php
+	}
     
 } // end of class
 

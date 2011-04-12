@@ -9,5 +9,4 @@ if ( ! defined( 'MEDIAWIKI' ) )
     die( 1 );
 
 require_once( dirname( dirname( __FILE__ ) ) . '/includes/SkinTemplate.php');
-#require_once('/data/www/guides.stage.mozilla.com/includes/SkinTemplate.php');
 
