@@ -148,7 +148,7 @@ class GMOTemplate extends QuickTemplate {
             
         <form action="<?php $this->text('searchaction') ?>" id="quick-search"><div>
 	        <input id="q" name="search" type="text" />
-            <input type="image" id="quick-search-btn" alt="Search" src="/skins/gmo/img/screen/template/search-submit.png">
+            <input type="image" id="quick-search-btn" alt="Search" src="<?=$wgStyleDirectory?>/gmo/img/screen/template/search-submit.png">
         </form>
             
         </div>
@@ -263,7 +263,7 @@ class GMOTemplate extends QuickTemplate {
 <div id="footer-wrap">
     <div class="cols" id="footer">
         <div class="six-col">
-	        <a href="/" id="logo-footer"><img src="/skins/gmo/img/screen/template/screen/logo_footer.png"></a>
+	        <a href="/" id="logo-footer"><img src="<?=$wgStyleDirectory?>/gmo/img/screen/template/screen/logo_footer.png"></a>
         </div>
         <div class="col-span">
         <?php if($this->data['copyrightico']) { ?><div id="f-copyrightico"><?php $this->html('copyrightico') ?></div><?php } ?>
