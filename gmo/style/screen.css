@@ -5,7 +5,7 @@ body{background:#fff url(../img/screen/template/background.jpg) no-repeat left t
 img{border:0;}
 body{margin-top:30px;min-width:880px;}
 #header{background: none repeat scroll 0 0 rgba(38, 38, 38, 0.98); border-bottom: 10px solid #A5151E; height: 44px; margin: 0 0 15px 6%; padding-top: 70px; position: relative;}
-#header h1{background:transparent url(../img/screen/template/dino.png) no-repeat left top; height: 225px; left: -130px; margin: 0; position: absolute; top: -30px; width: 100% z-index: 1;}
+#header h1{background:transparent url(../img/screen/template/dino.png) no-repeat left top; height: 225px; left: -130px; margin: 0; position: absolute; top: -30px; width: 100%; z-index: 1;}
 #header h1 a, #header h1 span{color: #FFFFFF; display: inline; float: left; font-family: MetaBold,Trebuchet MS,sans-serif; font-size: 135%; font-weight: bold; letter-spacing: -2px; margin: 70px 0 0 110px; padding: 5px 40px; text-decoration: none; text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);}
 #header h1 a:hover{text-decoration:none;color:#eee;text-shadow:0 1px 5px rgba(0,0,0,0.4), 0 0 10px rgba(255,255,255,0.4);}
 #header a:link, #header a:visited{color:#FFFFFF;}
@@ -33,7 +33,7 @@ body{margin-top:30px;min-width:880px;}
 #languages select{margin-left:10px;}
 #footer-wrap{clear:both;background:transparent url(../img/screen/template/screen/bg_body_2.jpg) no-repeat left 22%;}
 #localnav{background-color:#F9F9F9;border:1px solid #AAAAAA;font-size:95%;padding:5px;max-width:30%; margin-bottom: 35px;}
-#main{position:relative;padding:2% 6%;zoom:1;}
+#main{position:relative;padding:2% 6%;}
 #main-content{background: none repeat scroll 0 0 #FFFFFF; border-radius: 10px 10px 10px 10px; box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); padding: 10px 15px 40px; width: 77%; margin-left: 40px; float: left; }
 #main.with-menu #main-content{margin-left:265px;}
 #primary-wrap{float:left;margin-right:-250px;width:100%;}
@@ -123,7 +123,7 @@ fieldset legend{font-weight:bold;font-family:Georgia,serif;}
 ul.rows{border-top:1px solid #dbe2e8;margin:0 0 1em;}
 ul.rows li{border-bottom:1px solid #dbe2e8;padding:1em 10px;background:none;}
 #crumbs{clear:both;font-size:15px;letter-spacing:0.1em;margin:0 1%;padding:0 0 4% 0;position:relative;z-index:2;}
-#crumbs #crumbs-contents{padding:2px 4px;xbackground:#fff;}
+#crumbs #crumbs-contents{padding:2px 4px;background:#fff;}
 #crumbs a{text-transform:uppercase;color:#2987AD;font-family:"Trebuchet MS", sans-serif;font-weight:bold;font-size:80%;letter-spacing:1px;}
 h1#page-title{margin:10px 0 15px;font-size:35px;color:#b91e27;line-height:1;}
 .lead{font-family:Georgia, serif;font-size:20px;}
@@ -147,10 +147,10 @@ h1#page-title{margin:10px 0 15px;font-size:35px;color:#b91e27;line-height:1;}
     #main{padding-left:3%;}
 }
 #wiki-tools{padding:10px 0 0;max-width:15%;float:left;}
-#wiki-tools h2{ color: #A80C1E !important; font-size: 20px; font-weight: bold;s padding: 0 0 0 20px; margin-bottom: 5px; margin-top: 10px;}
+#wiki-tools h2{ color: #A80C1E !important; font-size: 20px; font-weight: bold; padding: 0 0 0 20px; margin-bottom: 5px; margin-top: 10px;}
 #wiki-tools li{padding:3px 0 3px 15px;width:100%;list-style-type:none;background:none;font-size: 12px;}
 #wpSummaryLabel{line-height:1.3;font-weight:bold;}
-#wpSummary input{font-size:small;voice-family:inherit;}
+#wpSummary input{font-size:small;font-family:inherit;}
 .editButtons{padding:2% 0;}
 #mw-history-search legend{-moz-border-radius:3px 3px 3px 3px;-webkit-border-radius:3px 3px 3px 3px;background-color:#FFFFFF;padding:0 1%;}
 #contentSub {color: #7D7D7D; font-size: 84%; line-height: 1.2em; margin: 0 0 1.4em 1em; width: auto;}
