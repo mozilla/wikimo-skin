@@ -121,6 +121,7 @@ class GMOTemplate extends QuickTemplate {
 
     /*************************************************************************************************/
     function header() {
+        global $wgStylePath;
     	
 ?>
 <body<?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
