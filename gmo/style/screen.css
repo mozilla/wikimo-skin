@@ -1,5 +1,5 @@
 /* MetaWebPro font family licensed from fontshop.com. WOFF-FTW! */
-@font-face {font-family: 'MetaBold'; src: url('//www.mozilla.com/img/fonts/MetaWebPro-Bold.eot'); src: local('☺'), url('//www.mozilla.com/img/fonts/MetaWebPro-Bold.woff') format('woff'); font-weight: bold;} 
+@font-face {font-family: 'MetaBold'; src: url('//www.mozilla.org/img/fonts/MetaWebPro-Bold.eot'); src: local('☺'), url('//www.mozilla.org/img/fonts/MetaWebPro-Bold.woff') format('woff'); font-weight: bold;} 
 *{margin:0;padding:0;line-height:1.4;}
 body{background:#fff url(../img/screen/template/background.jpg) no-repeat left top;color:#444;font:100% Arial, sans-serif;}
 img{border:0;}
