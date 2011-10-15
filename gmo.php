@@ -163,9 +163,6 @@ class GMOTemplate extends QuickTemplate {
 
         function body() {
             $title = $this->data['title'];
-            $mix = $this->extractTOC($this->data['bodytext']);
-            $body = $mix[0];
-            $toc = $mix[1];
             $menu = $toc?True:False;
 
             if($this->data['sitenotice']) { ?><div id="siteNotice"><?php $this->html('sitenotice') ?></div><?php }
@@ -241,9 +238,6 @@ class GMOTemplate extends QuickTemplate {
                 <?php if($this->data['newtalk'] ) { ?><div class="usermessage"><?php $this->html('newtalk')  ?></div><?php } ?>
                 <?php if($this->data['showjumplinks']) { ?><div id="jump-to-nav"><?php $this->msg('jumpto') ?> <a href="#column-one"><?php $this->msg('jumptonavigation') ?></a>, <a href="#searchInput"><?php $this->msg('jumptosearch') ?></a></div><?php } ?>
                 <!-- start content -->
-                <?php if($menu)
-
-                    $this->toc($toc); ?>
                 <?php $this->html('bodytext') ?>
                 <?php if($this->data['catlinks']) { $this->html('catlinks'); } ?>
                 <!-- end content -->
@@ -285,11 +279,6 @@ class GMOTemplate extends QuickTemplate {
 
 <?php
     }
-
-    /*************************************************************************************************/
-    function toc($toc) {
-        echo $toc;
-    }
     
     /*************************************************************************************************/
     function menu($toc) {
@@ -314,18 +303,6 @@ class GMOTemplate extends QuickTemplate {
     </ul>
 </div>
 <?php
-    }
-
-    function extractTOC(&$body) {
-        $toc = '';
-        $toc_pattern = '/<table id="toc".*?<\/table>/sim';
-        $elems = preg_split($toc_pattern, $body,-1, PREG_SPLIT_OFFSET_CAPTURE);
-        if (count($elems)<2)
-            return Array($body, $toc);
-        
-        $toc = substr($body,strlen($elems[0][0]), $elems[1][1]-strlen($elems[0][0]));
-        $body = substr($body,0, strlen($elems[0][0])) . substr($body, $elems[1][1]);
-        return Array($body, $toc);
     }
     
     function createBreadcrumbs($protocol) {
