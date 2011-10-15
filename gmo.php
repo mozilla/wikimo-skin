@@ -227,7 +227,6 @@ class GMOTemplate extends QuickTemplate {
             
             <div id="main-content"<?php if($menu)print(' class="with-menu"');?>>              
                 <h1 id="page-title"><?php print($title);?></h1>
-                <hr>
                 <div id="breadcrumbs">
                     <?php
                         if(isset($_SERVER['HTTPS'])) {
@@ -289,18 +288,7 @@ class GMOTemplate extends QuickTemplate {
 
     /*************************************************************************************************/
     function toc($toc) {
-?>
-<div id="localnav">
-    <ul class="first">
-        <strong>Content</strong><hr>
-        <div class="tocbody">
-            <ul>
-                <?php print($this->hackTOC($toc)) ?>
-            </ul>
-        </li>
-    </ul>
-</div>
-<?php
+        echo $toc;
     }
     
     /*************************************************************************************************/
@@ -338,15 +326,6 @@ class GMOTemplate extends QuickTemplate {
         $toc = substr($body,strlen($elems[0][0]), $elems[1][1]-strlen($elems[0][0]));
         $body = substr($body,0, strlen($elems[0][0])) . substr($body, $elems[1][1]);
         return Array($body, $toc);
-    }
-    
-    function hackTOC(&$toc) {
-        $pattern = '/<table id="toc".*?<\/h2><\/div>\s+<ul>/sim';
-        $toc = preg_replace($pattern, '', $toc);
-        #<li class="toclevel-1"><a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a></li>
-        $pattern = '/<li class="toclevel-[0-9]">/sim';
-        $toc = preg_replace($pattern, '<li>', $toc);
-        return $toc;        
     }
     
     function createBreadcrumbs($protocol) {
