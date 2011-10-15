@@ -350,6 +350,9 @@ class GMOTemplate extends QuickTemplate {
     }
     
     function createBreadcrumbs($protocol) {
+        $str = $protocol.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+        $query = parse_url($str, PHP_URL_QUERY);
+        parse_str($query, $search_params);
         
         $pieces = explode("/", $_SERVER['REQUEST_URI']);
         unset($pieces[0]); /* remove the first (empty item) from the array) */
@@ -371,7 +374,6 @@ class GMOTemplate extends QuickTemplate {
         echo "<a href=\"" . $base_url .  "\">Home</a>";
         
         foreach($pieces as $part) {
-        
             /* check if there's unwanted url part */    
             foreach($unwanted as $bogus_part) {
             
@@ -383,8 +385,13 @@ class GMOTemplate extends QuickTemplate {
             }
             $part = htmlspecialchars($part, ENT_QUOTES);
             $item_url .= "/" . $part;
-            $item_url = htmlspecialchars($item_url, ENT_QUOTES);
-            echo "&nbsp;&raquo;&nbsp;<a href=\"$item_url\">" . $part . "</a>";  
+            if(strpos($part, 'Special:Search?search=') !== false) {
+                $item_url = html_entity_decode($item_url);
+                echo "&nbsp;&raquo;&nbsp;<a href=\"$item_url\"> Search: " . $search_params['search'] . "</a>";
+            } else {
+                $item_url = htmlspecialchars($item_url, ENT_QUOTES);
+                echo "&nbsp;&raquo;&nbsp;<a href=\"$item_url\">" . $part . "</a>";
+            }
             
         }
   
