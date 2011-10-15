@@ -259,6 +259,7 @@ class GMOTemplate extends QuickTemplate {
         /*************************************************************************************************/
         
         function footer() {
+            global $wgStylePath;
     ?>
         </div><!-- end #main -->
 </div>
