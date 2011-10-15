@@ -5,7 +5,7 @@ body{background:#fff url(../img/screen/template/background.jpg) no-repeat left t
 img{border:0;}
 body{margin-top:30px;min-width:880px;}
 #header{background: none repeat scroll 0 0 rgba(38, 38, 38, 0.98); border-bottom: 10px solid #A5151E; height: 44px; margin: 0 0 15px 6%; padding-top: 70px; position: relative;}
-#header h1{background:transparent url(../img/screen/template/dino.png) no-repeat left top; height: 225px; left: -130px; margin: 0; position: absolute; top: -30px; width: 100%; z-index: 1;}
+#header h1{background:transparent url(../img/screen/template/dino.png) no-repeat left top; height: 225px; left: -130px; margin: 0; position: absolute; top: -30px;}
 #header h1 a, #header h1 span{color: #FFFFFF; display: inline; float: left; font-family: MetaBold,Trebuchet MS,sans-serif; font-size: 135%; font-weight: bold; letter-spacing: -2px; margin: 70px 0 0 110px; padding: 5px 40px; text-decoration: none; text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);}
 #header h1 a:hover{text-decoration:none;color:#eee;text-shadow:0 1px 5px rgba(0,0,0,0.4), 0 0 10px rgba(255,255,255,0.4);}
 #header a:link, #header a:visited{color:#FFFFFF;}
