@@ -85,7 +85,7 @@ h3{font-size:20px;font-weight:bold;}
 h4{font-size:15px;margin:.85em 0;}
 h5{font-size:12.5px;margin:.875em 0;}
 ul, ol{margin:1em 0 1em 25px;}
-li ul, li ol{margin:0 0 0 30px;}
+li ul, li ol{margin:0 0 0 10px;}
 td, th{padding:0.2em;}
 table.data{border-collapse:collapse;margin:0.5em auto;border:1px solid;}
 table.data caption{margin:1em auto 0.2em;font-size:small;font-style:italic;text-align:center;}
