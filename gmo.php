@@ -351,11 +351,9 @@ class GMOTemplate extends QuickTemplate {
         $base_url = htmlspecialchars($base_url, ENT_QUOTES);
         $item_url = $base_url;
         echo "<a href=\"" . $base_url .  "\">Home</a>";
-        
         foreach($pieces as $part) {
             /* check if there's unwanted url part */    
             foreach($unwanted as $bogus_part) {
-            
                 $pos = strpos($part, $bogus_part);
                 if($pos !== false) {
                     $part = str_replace($bogus_part, '', $part);
@@ -364,7 +362,7 @@ class GMOTemplate extends QuickTemplate {
             }
             $part = htmlspecialchars($part, ENT_QUOTES);
             $item_url .= "/" . $part;
-            if(strpos($part, 'Special:Search?search=') !== false) {
+            if(strpos($part, 'search=') !== false) {
                 $item_url = html_entity_decode($item_url);
                 echo "&nbsp;&raquo;&nbsp;<a href=\"$item_url\"> Search: " . $search_params['search'] . "</a>";
             } else {
