@@ -115,6 +115,15 @@ class GMOTemplate extends QuickTemplate {
 	<?php if($this->data['userjs'    ]) { ?><script type="text/javascript" src="<?php $this->text('userjs'    ) ?>"></script><?php } ?>
 	<?php if($this->data['userjsprev']) { ?><script type="text/javascript"><?php      $this->html('userjsprev') ?></script><?php   } ?>
 	<?php $this->html('headscripts') ?>
+    <script src="/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=gmo&amp;*"></script>
+    <script src="/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=gmo&amp;*"></script>
+    <script>if ( window.mediaWiki ) {
+
+        mediaWiki.loader.load(["mediawiki.util", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax", "ext.smw.sorttable"]);
+        mediaWiki.loader.go();
+    }
+    </script>
+    <script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
 </head>
 <?php
     }
