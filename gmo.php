@@ -350,7 +350,8 @@ class GMOTemplate extends QuickTemplate {
             $item_url .= "/" . $part;
             if(strpos($part, 'search=') !== false) {
                 $item_url = html_entity_decode($item_url);
-                echo "&nbsp;&raquo;&nbsp;<a href=\"$item_url\"> Search: " . $search_params['search'] . "</a>";
+                $_params = htmlspecialchars($search_params['search'], ENT_QUOTES);
+                echo "&nbsp;&raquo;&nbsp;<a href=\"$item_url\"> Search: " . $_params . "</a>";
             } else {
                 $item_url = htmlspecialchars($item_url, ENT_QUOTES);
                 echo "&nbsp;&raquo;&nbsp;<a href=\"$item_url\">" . $part . "</a>";
