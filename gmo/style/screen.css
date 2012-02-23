@@ -34,7 +34,7 @@ body{margin-top:30px;min-width:880px;}
 #footer-wrap{clear:both;background:transparent url(../img/screen/template/screen/bg_body_2.jpg) no-repeat left 22%;}
 #localnav{background-color:#F9F9F9;border:1px solid #AAAAAA;font-size:95%;padding:5px;max-width:30%; margin-bottom: 35px;}
 #main{position:relative;padding:2% 6%;}
-#main-content{background: none repeat scroll 0 0 #FFFFFF; border-radius: 10px 10px 10px 10px; box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); padding: 10px 15px 40px;}
+#main-content{background: none repeat scroll 0 0 #FFFFFF; border-radius: 10px 10px 10px 10px; box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); padding: 10px 15px 40px; overflow: hidden;}
 #main-content h1 { border-bottom: 3px solid grey;}
 #main.with-menu #main-content{margin-left:265px;}
 #primary-wrap{float:left;margin-right:-250px;width:100%;}
