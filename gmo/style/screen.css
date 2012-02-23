@@ -34,7 +34,7 @@ body{margin-top:30px;min-width:880px;}
 #footer-wrap{clear:both;background:transparent url(../img/screen/template/screen/bg_body_2.jpg) no-repeat left 22%;}
 #localnav{background-color:#F9F9F9;border:1px solid #AAAAAA;font-size:95%;padding:5px;max-width:30%; margin-bottom: 35px;}
 #main{position:relative;padding:2% 6%;}
-#main-content{background: none repeat scroll 0 0 #FFFFFF; border-radius: 10px 10px 10px 10px; box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); padding: 10px 15px 40px; width: 77%; margin-left: 40px; float: left; }
+#main-content{background: none repeat scroll 0 0 #FFFFFF; border-radius: 10px 10px 10px 10px; box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); padding: 10px 15px 40px;}
 #main-content h1 { border-bottom: 3px solid grey;}
 #main.with-menu #main-content{margin-left:265px;}
 #primary-wrap{float:left;margin-right:-250px;width:100%;}
@@ -149,7 +149,7 @@ h1#page-title{margin:10px 0 15px;font-size:35px;color:#b91e27;line-height:1;}
     #header, #footer, #crumbs, h1#page-title{margin-left:3%;}
     #main{padding-left:3%;}
 }
-#wiki-tools{padding:10px 0 0;max-width:15%;float:left;}
+#wiki-tools{padding:10px 0 0;max-width:15%;float:left; margin-right: 40px;}
 #wiki-tools h2{ color: #A80C1E !important; font-size: 20px; font-weight: bold; padding: 0 0 0 20px; margin-bottom: 5px; margin-top: 10px;}
 #wiki-tools li{padding:3px 0 3px 15px;width:100%;list-style-type:none;background:none;font-size: 12px;}
 #wpSummaryLabel{line-height:1.3;font-weight:bold;}
